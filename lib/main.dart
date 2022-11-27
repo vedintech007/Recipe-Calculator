@@ -35,10 +35,22 @@ class HomePage extends StatelessWidget {
         itemCount: RecipeModel.samples.length,
         itemBuilder: (context, index) {
           // TODO: Update to return Recipe card
-          return Text(RecipeModel.samples[index].label);
+          // TODO: Add GestureDetector
+          return buildRecipeCard(RecipeModel.samples[index]);
         },
       ),
     );
   }
+
   // TODO: Add buildRecipeCard() here
+  Widget buildRecipeCard(RecipeModel recipe) {
+    return Card(
+      child: Column(
+        children: [
+          Image.asset(recipe.imageUrl),
+          Text(recipe.label),
+        ],
+      ),
+    );
+  }
 }
