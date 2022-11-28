@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'models/recipe_model.dart';
+import 'recipe_detail.dart';
 
 void main() {
   runApp(const RecipeApp());
@@ -19,7 +20,7 @@ class RecipeApp extends StatelessWidget {
           secondary: Colors.black,
         ),
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
@@ -32,18 +33,30 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("Recipe Calculator")),
       body: ListView.builder(
-        itemCount: RecipeModel.samples.length,
+        itemCount: Recipe.samples.length,
         itemBuilder: (context, index) {
           // TODO: Update to return Recipe card
           // TODO: Add GestureDetector
-          return buildRecipeCard(RecipeModel.samples[index]);
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  // TODO: Replace return with return RecipeDetail()
+                  return RecipeDetail(recipe: Recipe.samples[index]);
+                  // SafeArea(child: const Text("Hello"));
+                }),
+              );
+            },
+            child: buildRecipeCard(Recipe.samples[index]),
+          );
         },
       ),
     );
   }
 
   // TODO: Add buildRecipeCard() here
-  Widget buildRecipeCard(RecipeModel recipe) {
+  Widget buildRecipeCard(Recipe recipe) {
     return Card(
       elevation: 2.0,
       shape: RoundedRectangleBorder(
